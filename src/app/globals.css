@@ -4,12 +4,16 @@
   :root {
     --primary-color: #c10007;
     --light-gray: #f9f9f9;
+    --black-gray: #02282c;
   }
 
   .text-primary {
     color: var(--primary-color);
   }
 
+  .text-gry {
+    color: var(--black-gray);
+  }
   .bg-primary {
     background-color: var(--primary-color);
   }

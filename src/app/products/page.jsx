@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getData } from "../utils/api";
+// import { getData } from "../utils/api";
 
 function Products() {
   const [products, setProducts] = useState([]);
 
   const getProductsData = async () => {
     try {
-      const data = await getData("products");
-      setProducts(data.products);
+      // const data = await getData("products");
+      //  setProducts(data.products);
+
+      const data = await fetch("https://dummyjson.com/products");
+      const jsonData = await data.json(data);
+      setProducts(jsonData.products);
     } catch (error) {
       console.log(error, "ERROR ISHLADI");
     }

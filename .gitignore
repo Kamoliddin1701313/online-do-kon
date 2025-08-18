@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# Kutubxonalar ro'yxati (Gitga kirmasin)
+libraries.txt
+
 # next.js
 /.next/
 /out/

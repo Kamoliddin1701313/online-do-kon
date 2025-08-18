@@ -1,14 +1,24 @@
 "use client";
+import logo from "../../../../public/icons/online_bozor_logo.webp";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { getData } from "@/app/utils/api";
+import Tooltip from "@mui/material/Tooltip";
+
+import { motion, useScroll } from "motion/react";
 
 // react icons kutubxonadagi iconkalar
 import { FaListUl } from "react-icons/fa6";
 import { TbShoppingBagHeart } from "react-icons/tb";
 import { MdYoutubeSearchedFor } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
+import Image from "next/image";
 
 function Header() {
+  const [language, setLanguage] = useState(false);
+
+  const { scrollYProgress } = useScroll();
+
   const [toggle, setToggle] = useState(false);
 
   const ToggleFunction = () => {
@@ -23,8 +33,15 @@ function Header() {
   // Search qilishdagi funksiya
   const searchData = async () => {
     try {
-      const respons = await getData(`products/search?q=${search}`);
-      setGlobalSearch(respons?.products);
+      const respons = await fetch(
+        `https://dummyjson.com/products/search?q=${search}`
+      );
+      const responsJson = await respons.json();
+      setGlobalSearch(responsJson?.products);
+
+      // const respons = await getData(`products/search?q=${search}`);
+      // const respons = await getData("");
+      // setGlobalSearch(respons?.products);
     } catch (error) {}
   };
 
@@ -51,18 +68,18 @@ function Header() {
   };
 
   return (
-    <div className="h-[70px] py-3.5 bg-primary fixed w-full">
-      <div className="max-w-[1240px] h-full m-auto flex gap-10 items-center justify-between relative">
+    <div className="h-[70px] py-3.5 bg-primary fixed w-full z-50">
+      <div className="max-w-[1240px] h-full m-auto flex gap-5 items-center justify-between relative">
         <Link
           href="/"
           className="h-full rounded-[8px] bg-white px-3.5 w-1/8 text-primary text-center flex items-center"
         >
-          Online Bozor
+          <Image src={logo} alt="online_bozor_logo" className="w-[160px]" />
         </Link>
 
-        <div className="flex w-full gap-5 justify-end h-full">
+        <div className="flex w-full gap-3 justify-end h-full items-center">
           <div className="">
-            <button
+            {/* <button
               onClick={ToggleFunction}
               type="button"
               aria-label="Katalog"
@@ -70,7 +87,20 @@ function Header() {
             >
               <FaListUl className="text-[20px]" />
               <span>Mahsulotlar</span>
-            </button>
+            </button> */}
+
+            <Tooltip
+              title={
+                <span className="text-white text-[16px]">Mahsulotlar</span>
+              }
+              arrow
+            >
+              <FaListUl
+                onClick={ToggleFunction}
+                type="button"
+                className="text-[34px] text-red-600 bg-white cursor-pointer rounded-[8px] p-[6px]"
+              />
+            </Tooltip>
 
             {toggle && (
               <div
@@ -81,9 +111,15 @@ function Header() {
                     Online do'kon xizmatidagi bo'limlar
                   </h1>
                   {globalSearch?.map((searchvalue, index) => (
-                    <div key={index}>
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 100 }}
+                      transition={{ duration: 0.8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                    >
                       <h1>{searchvalue?.description}</h1>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -130,9 +166,15 @@ function Header() {
                 >
                   <div className="overflow-auto max-h-[420px] p-3 bg-white">
                     {globalSearch?.map((searchvalue, index) => (
-                      <div key={index}>
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 100 }}
+                        transition={{ duration: 0.8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                      >
                         <h1>{searchvalue?.description}</h1>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
@@ -141,10 +183,33 @@ function Header() {
           </div>
         </div>
 
+        <div className="flex items-center gap-5">
+          {language ? (
+            <button className="text-white text-[18px] border-b-[2px] cursor-pointer">
+              uzb
+            </button>
+          ) : (
+            <button className="text-white text-[18px] border-b-[2px] cursor-pointer leading-5">
+              rus
+            </button>
+          )}
+
+          <Tooltip
+            title={
+              <span className="text-white text-[16px]">Ro'yxatdan o'tish</span>
+            }
+            arrow
+          >
+            <Link href="/auth/login">
+              <FaRegUser className="text-[18px] text-white cursor-pointer" />
+            </Link>
+          </Tooltip>
+        </div>
+
         <button
           type="button"
           aria-label="Sevimlilar"
-          className="relative p-2 rounded cursor-pointer h-full"
+          className="relative rounded cursor-pointer h-full"
         >
           <TbShoppingBagHeart className="text-[22px] text-white" />
           <span className="absolute -top-[10px] -right-[10px] bg-[#636A79] text-white rounded-full text-[14px] px-[6px] font-medium">
@@ -152,6 +217,21 @@ function Header() {
           </span>
         </button>
       </div>
+
+      <motion.div
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "absolute",
+          bottom: "-5px",
+          left: 0,
+          right: 0,
+          height: "5px",
+          originX: 0,
+          overflow: "hidden",
+          backgroundColor: "#fbc902",
+        }}
+      />
     </div>
   );
 }
