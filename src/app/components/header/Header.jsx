@@ -10,12 +10,23 @@ import { motion, useScroll } from "motion/react";
 // react icons kutubxonadagi iconkalar
 import { FaListUl } from "react-icons/fa6";
 import { TbShoppingBagHeart } from "react-icons/tb";
+import { HiOutlineLogout } from "react-icons/hi";
 import { MdYoutubeSearchedFor } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function Header() {
+  const router = useRouter();
   const [language, setLanguage] = useState(false);
+  const [userToken, setUserToken] = useState(null);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setUserToken(JSON.parse(storedToken));
+    }
+  }, []);
+
 
   const { scrollYProgress } = useScroll();
 
@@ -65,6 +76,10 @@ function Header() {
 
   const handleBlur = () => {
     setInFocus(false);
+  };
+
+  const loginBtn = () => {
+    router.push("/auth/login");
   };
 
   return (
@@ -194,16 +209,22 @@ function Header() {
             </button>
           )}
 
-          <Tooltip
-            title={
-              <span className="text-white text-[16px]">Ro'yxatdan o'tish</span>
-            }
-            arrow
-          >
-            <Link href="/auth/login">
-              <FaRegUser className="text-[18px] text-white cursor-pointer" />
-            </Link>
-          </Tooltip>
+          {userToken && userToken.access ? (
+            "salom"
+          ) : (
+            <Tooltip
+              title={
+                <span className="text-white text-[16px]">
+                  Ro'yxatdan o'tish
+                </span>
+              }
+              arrow
+            >
+              <button onClick={loginBtn}>
+                <FaRegUser className="text-[18px] text-white cursor-pointer" />
+              </button>
+            </Tooltip>
+          )}
         </div>
 
         <button
