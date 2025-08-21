@@ -10,10 +10,13 @@ import { IMaskInput } from "react-imask"; // react-imask kutubxonasi parol teris
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // react icons kutubxonasidagi iconkalari parolga va telefonga ishlatilgan
 import { useState } from "react";
 import { postData } from "@/app/utils/api";
+import { useDispatch } from "react-redux";
+import { setToken } from "@/store/slices/cartSlice";
 
 function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState({
     email: "",
@@ -31,7 +34,7 @@ function Login() {
     try {
       const respons = await postData("users/login/", login);
       if (respons) {
-        localStorage.setItem("token", JSON.stringify(respons));
+        dispatch(setToken(respons));
         alert("Ro'yxatdan o'tildi Kamoliddin bratan");
         setLoading((prev) => !prev);
         router.push("/");

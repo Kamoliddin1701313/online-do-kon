@@ -45,8 +45,6 @@ function Register() {
         code: user.code,
       });
 
-      console.log(res, "EEEEEE");
-
       if (res) {
         alert("Email muvaffaqiyatli tasdiqlandi!");
         setLoading(false);

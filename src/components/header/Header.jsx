@@ -1,13 +1,10 @@
 "use client";
-import logo from "../../../../public/icons/online_bozor_logo.webp";
+import logo from "../../../public/icons/online_bozor_logo.webp";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { getData } from "@/app/utils/api";
 import Tooltip from "@mui/material/Tooltip";
-
 import { motion, useScroll } from "motion/react";
 
-// react icons kutubxonadagi iconkalar
 import { FaListUl } from "react-icons/fa6";
 import { TbShoppingBagHeart } from "react-icons/tb";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -15,55 +12,47 @@ import { MdYoutubeSearchedFor } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { clearToken } from "@/store/slices/cartSlice";
 
 function Header() {
   const router = useRouter();
   const [language, setLanguage] = useState(false);
-  const [userToken, setUserToken] = useState(null);
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setUserToken(JSON.parse(storedToken));
-    }
-  }, []);
 
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.cart);
+  const isAuth = Boolean(token); // ✅ token bor-yo‘qligini shu bilan bilamiz
 
   const { scrollYProgress } = useScroll();
 
   const [toggle, setToggle] = useState(false);
+  const ToggleFunction = () => setToggle((state) => !state);
 
-  const ToggleFunction = () => {
-    setToggle((state) => !state);
-  };
-
-  // Search state lari
+  // Search state
   const [inFocus, setInFocus] = useState(false);
   const [search, setSearch] = useState("");
   const [globalSearch, setGlobalSearch] = useState([]);
 
-  // Search qilishdagi funksiya
+  // Qidiruv
   const searchData = async () => {
     try {
+      //   if (!search) {
+      //     setGlobalSearch([]);
+      //     return;
+      //   }
       const respons = await fetch(
         `https://dummyjson.com/products/search?q=${search}`
       );
       const responsJson = await respons.json();
       setGlobalSearch(responsJson?.products);
-
-      // const respons = await getData(`products/search?q=${search}`);
-      // const respons = await getData("");
-      // setGlobalSearch(respons?.products);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error, "malumotlar kelmadi");
+    }
   };
 
-  // Search qilishdagi useEffect
   useEffect(() => {
     searchData();
   }, [search]);
-
-  const Search = (e) => {
-    setSearch(e);
-  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -71,15 +60,24 @@ function Header() {
 
   const handleFocus = () => {
     setInFocus(true);
-    setToggle(false); //ToggleFunction oyna yopiladi false bo'lsa
+    setToggle(false);
   };
 
   const handleBlur = () => {
     setInFocus(false);
   };
 
+  const Search = (v) => {
+    setSearch(v);
+  };
+
   const loginBtn = () => {
     router.push("/auth/login");
+  };
+
+  const logoutBtn = () => {
+    dispatch(clearToken());
+    router.push("/auth/register");
   };
 
   return (
@@ -93,17 +91,7 @@ function Header() {
         </Link>
 
         <div className="flex w-full gap-3 justify-end h-full items-center">
-          <div className="">
-            {/* <button
-              onClick={ToggleFunction}
-              type="button"
-              aria-label="Katalog"
-              className="py-2 rounded-[8px] px-3.5 flex items-center cursor-pointer h-full gap-2.5 text-primary bg-white"
-            >
-              <FaListUl className="text-[20px]" />
-              <span>Mahsulotlar</span>
-            </button> */}
-
+          <div>
             <Tooltip
               title={
                 <span className="text-white text-[16px]">Mahsulotlar</span>
@@ -118,14 +106,12 @@ function Header() {
             </Tooltip>
 
             {toggle && (
-              <div
-                className={`absolute top-[56px] left-0 w-full bg-light px-5 pb-5 rounded-b-[20px] shadow-xl/10 transition-all duration-200`}
-              >
+              <div className="absolute top-[56px] left-0 w-full bg-light px-5 pb-5 rounded-b-[20px] shadow-xl/10 transition-all duration-200">
                 <div className="overflow-auto max-h-[520px] p-3 bg-white">
                   <h1 className="text-primary font-geomanist text-center font-semibold text-[36px]">
                     Online do'kon xizmatidagi bo'limlar
                   </h1>
-                  {globalSearch?.map((searchvalue, index) => (
+                  {globalSearch?.map((item, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 100 }}
@@ -133,7 +119,7 @@ function Header() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                     >
-                      <h1>{searchvalue?.description}</h1>
+                      <h1>{item?.description}</h1>
                     </motion.div>
                   ))}
                 </div>
@@ -159,9 +145,6 @@ function Header() {
                     setGlobalSearch();
                   }
                 }}
-                // onKeyDown={(e) => {
-                //   if (e.key === "Enter") setGlobalSearch();
-                // }}
               />
               <button
                 type="button"
@@ -171,26 +154,28 @@ function Header() {
                 <MdYoutubeSearchedFor className="text-[22px] text-primary" />
               </button>
 
-              {inFocus && (
+              {inFocus && globalSearch?.length > 0 && (
                 <div
                   className={`absolute top-[56px] left-0 w-full bg-light px-5 pb-5 rounded-b-[20px] shadow-xl/10 ${
-                    inFocus || search?.length > 0
-                      ? "opacity-100 z-10"
-                      : "opacity-0 -z-10"
+                    inFocus ? "opacity-100 z-10" : "opacity-0 -z-10"
                   }`}
                 >
                   <div className="overflow-auto max-h-[420px] p-3 bg-white">
-                    {globalSearch?.map((searchvalue, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 100 }}
-                        transition={{ duration: 0.8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                      >
-                        <h1>{searchvalue?.description}</h1>
-                      </motion.div>
-                    ))}
+                    {globalSearch?.length > 0 ? (
+                      globalSearch.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 100 }}
+                          transition={{ duration: 0.8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                        >
+                          <h1>{item?.description}</h1>
+                        </motion.div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">Hech narsa topilmadi</p>
+                    )}
                   </div>
                 </div>
               )}
@@ -209,8 +194,15 @@ function Header() {
             </button>
           )}
 
-          {userToken && userToken.access ? (
-            "salom"
+          {isAuth ? (
+            <Tooltip
+              title={<span className="text-white text-[16px]">Chiqish</span>}
+              arrow
+            >
+              <button onClick={logoutBtn}>
+                <HiOutlineLogout className="text-[24px] mt-[3px] text-white cursor-pointer" />
+              </button>
+            </Tooltip>
           ) : (
             <Tooltip
               title={
@@ -221,7 +213,7 @@ function Header() {
               arrow
             >
               <button onClick={loginBtn}>
-                <FaRegUser className="text-[18px] text-white cursor-pointer" />
+                <FaRegUser className="text-[18px] mt-[3px] text-white cursor-pointer" />
               </button>
             </Tooltip>
           )}
