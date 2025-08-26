@@ -1,7 +1,7 @@
 import "./globals.css";
 import Providers from "../providers/Providers";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
+import Header from "@/app/components/header/Header";
+import Footer from "@/app/components/footer/Footer";
 
 export const metadata = {
   title: "Online do'koni",
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
           <div className="flex flex-col min-h-screen">
             <Header />
 
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 mt-[110px]">{children}</main>
 
             <Footer />
           </div>

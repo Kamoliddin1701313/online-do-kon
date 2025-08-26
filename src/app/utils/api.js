@@ -11,8 +11,6 @@ export async function getData(endpoint) {
       cache: "no-store", // Next.js server componentlarda keshni olib tashlash uchun
     });
 
-    console.log(res);
-
     // if (!res.ok) throw new Error("GET xato bo‘ldi");
     // return await res.json();
   } catch (error) {
@@ -32,10 +30,18 @@ export async function postData(endpoint, data) {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) throw new Error("POST xato bo‘ldi");
-    return await res.json();
+    const responseData = await res.json(); // ✅ JSON javobni olish
+
+    if (!res.ok) {
+      // ✅ backenddan kelgan error xabarni tashlab yuboramiz
+      throw new Error(
+        responseData?.message || responseData?.error || "POST xato bo‘ldi"
+      );
+    }
+
+    return responseData; // ✅ muvaffaqiyatli bo‘lsa shu qaytadi
   } catch (error) {
-    console.error("POST xato:", error);
-    throw error;
+    console.error("POST xato:", error.message);
+    throw error; // ❗️ tashqarida ushlash uchun qaytadan tashlaymiz
   }
 }

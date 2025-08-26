@@ -31,7 +31,6 @@ export default function Home() {
         matters to this principle of selection: he rejects pleasures to secure
         other greater pleasures, or else he endures pains to avoid worse pains."
       </h1>
-
       <h1>
         Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
         45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui
@@ -62,7 +61,6 @@ export default function Home() {
         matters to this principle of selection: he rejects pleasures to secure
         other greater pleasures, or else he endures pains to avoid worse pains."
       </h1>
-
       <h1>
         Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
         45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui
@@ -93,7 +91,6 @@ export default function Home() {
         matters to this principle of selection: he rejects pleasures to secure
         other greater pleasures, or else he endures pains to avoid worse pains."
       </h1>
-
       <h1>
         Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
         45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui

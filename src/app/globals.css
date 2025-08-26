@@ -26,3 +26,16 @@
     font-family: "Geomanist", Arial, sans-serif;
   }
 }
+
+.loading {
+  animation: loading_box 1.2s linear infinite;
+}
+
+@keyframes loading_box {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

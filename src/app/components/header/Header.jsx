@@ -1,19 +1,26 @@
 "use client";
-import logo from "../../../public/icons/online_bozor_logo.webp";
+import logo from "../../../../public/icons/online_bozor_logo.webp";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Tooltip from "@mui/material/Tooltip";
 import { motion, useScroll } from "motion/react";
 
 import { FaListUl } from "react-icons/fa6";
 import { TbShoppingBagHeart } from "react-icons/tb";
-import { HiOutlineLogout } from "react-icons/hi";
+import { TbCategoryPlus } from "react-icons/tb";
 import { MdYoutubeSearchedFor } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "@/store/slices/cartSlice";
+import Categories from "../categories/Categories";
+
+import dynamic from "next/dynamic";
+
+// faqat clientda ishlasin deb chaqirib oldik
+const Tooltip = dynamic(() => import("@mui/material/Tooltip"), { ssr: false });
+
+import { HiOutlineLogout } from "react-icons/hi";
+import { FaRegUser } from "react-icons/fa";
 
 function Header() {
   const router = useRouter();
@@ -80,9 +87,11 @@ function Header() {
     router.push("/auth/register");
   };
 
+  console.log(isAuth, "XXXXXXX");
+
   return (
-    <div className="h-[70px] py-3.5 bg-primary fixed w-full z-50">
-      <div className="max-w-[1240px] h-full m-auto flex gap-5 items-center justify-between relative">
+    <div className="bg-primary h-[110px] fixed w-full z-50">
+      <div className="max-w-[1240px] m-auto py-3.5 box-border h-[70px] flex gap-5 items-center justify-between relative">
         <Link
           href="/"
           className="h-full rounded-[8px] bg-white px-3.5 w-1/8 text-primary text-center flex items-center"
@@ -98,7 +107,7 @@ function Header() {
               }
               arrow
             >
-              <FaListUl
+              <TbCategoryPlus
                 onClick={ToggleFunction}
                 type="button"
                 className="text-[34px] text-red-600 bg-white cursor-pointer rounded-[8px] p-[6px]"
@@ -106,7 +115,7 @@ function Header() {
             </Tooltip>
 
             {toggle && (
-              <div className="absolute top-[56px] left-0 w-full bg-light px-5 pb-5 rounded-b-[20px] shadow-xl/10 transition-all duration-200">
+              <div className="absolute top-[70px] z-10 left-0 w-full bg-light px-5 pb-5 rounded-b-[20px] shadow-xl/10 transition-all duration-200">
                 <div className="overflow-auto max-h-[520px] p-3 bg-white">
                   <h1 className="text-primary font-geomanist text-center font-semibold text-[36px]">
                     Online do'kon xizmatidagi bo'limlar
@@ -194,6 +203,8 @@ function Header() {
             </button>
           )}
 
+          {/* O'chirma Kamoliddin bu cammentga olingan code ni  */}
+
           {isAuth ? (
             <Tooltip
               title={<span className="text-white text-[16px]">Chiqish</span>}
@@ -217,6 +228,7 @@ function Header() {
               </button>
             </Tooltip>
           )}
+          {/* O'chirma Kamoliddin bu cammentga olingan code ni  */}
         </div>
 
         <button
@@ -230,6 +242,8 @@ function Header() {
           </span>
         </button>
       </div>
+
+      <Categories />
 
       <motion.div
         id="scroll-indicator"
