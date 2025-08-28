@@ -1,125 +1,66 @@
 export default function Home() {
   return (
-    <div className="max-w-[1240px] m-auto">
+    <div>
       <h1>
-        Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
-        45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui
-        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-        et quas molestias excepturi sint occaecati cupiditate non provident,
-        similique sunt in culpa qui officia deserunt mollitia animi, id est
-        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-        cumque nihil impedit quo minus id quod maxime placeat facere possimus,
-        omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
-        quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
-        ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-        earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
-        voluptatibus maiores alias consequatur aut perferendis doloribus
-        asperiores repellat." 1914 translation by H. Rackham "On the other hand,
-        we denounce with righteous indignation and dislike men who are so
-        beguiled and demoralized by the charms of pleasure of the moment, so
-        blinded by desire, that they cannot foresee the pain and trouble that
-        are bound to ensue; and equal blame belongs to those who fail in their
-        duty through weakness of will, which is the same as saying through
-        shrinking from toil and pain. These cases are perfectly simple and easy
-        to distinguish. In a free hour, when our power of choice is untrammelled
-        and when nothing prevents our being able to do what we like best, every
-        pleasure is to be welcomed and every pain avoided. But in certain
-        circumstances and owing to the claims of duty or the obligations of
-        business it will frequently occur that pleasures have to be repudiated
-        and annoyances accepted. The wise man therefore always holds in these
-        matters to this principle of selection: he rejects pleasures to secure
-        other greater pleasures, or else he endures pains to avoid worse pains."
-      </h1>
-      <h1>
-        Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
-        45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui
-        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-        et quas molestias excepturi sint occaecati cupiditate non provident,
-        similique sunt in culpa qui officia deserunt mollitia animi, id est
-        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-        cumque nihil impedit quo minus id quod maxime placeat facere possimus,
-        omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
-        quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
-        ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-        earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
-        voluptatibus maiores alias consequatur aut perferendis doloribus
-        asperiores repellat." 1914 translation by H. Rackham "On the other hand,
-        we denounce with righteous indignation and dislike men who are so
-        beguiled and demoralized by the charms of pleasure of the moment, so
-        blinded by desire, that they cannot foresee the pain and trouble that
-        are bound to ensue; and equal blame belongs to those who fail in their
-        duty through weakness of will, which is the same as saying through
-        shrinking from toil and pain. These cases are perfectly simple and easy
-        to distinguish. In a free hour, when our power of choice is untrammelled
-        and when nothing prevents our being able to do what we like best, every
-        pleasure is to be welcomed and every pain avoided. But in certain
-        circumstances and owing to the claims of duty or the obligations of
-        business it will frequently occur that pleasures have to be repudiated
-        and annoyances accepted. The wise man therefore always holds in these
-        matters to this principle of selection: he rejects pleasures to secure
-        other greater pleasures, or else he endures pains to avoid worse pains."
-      </h1>
-      <h1>
-        Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
-        45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui
-        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-        et quas molestias excepturi sint occaecati cupiditate non provident,
-        similique sunt in culpa qui officia deserunt mollitia animi, id est
-        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-        cumque nihil impedit quo minus id quod maxime placeat facere possimus,
-        omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
-        quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
-        ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-        earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
-        voluptatibus maiores alias consequatur aut perferendis doloribus
-        asperiores repellat." 1914 translation by H. Rackham "On the other hand,
-        we denounce with righteous indignation and dislike men who are so
-        beguiled and demoralized by the charms of pleasure of the moment, so
-        blinded by desire, that they cannot foresee the pain and trouble that
-        are bound to ensue; and equal blame belongs to those who fail in their
-        duty through weakness of will, which is the same as saying through
-        shrinking from toil and pain. These cases are perfectly simple and easy
-        to distinguish. In a free hour, when our power of choice is untrammelled
-        and when nothing prevents our being able to do what we like best, every
-        pleasure is to be welcomed and every pain avoided. But in certain
-        circumstances and owing to the claims of duty or the obligations of
-        business it will frequently occur that pleasures have to be repudiated
-        and annoyances accepted. The wise man therefore always holds in these
-        matters to this principle of selection: he rejects pleasures to secure
-        other greater pleasures, or else he endures pains to avoid worse pains."
-      </h1>
-      <h1>
-        Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in
-        45 BC "At vero eos et accusamus et iusto odio dignissimos ducimus qui
-        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-        et quas molestias excepturi sint occaecati cupiditate non provident,
-        similique sunt in culpa qui officia deserunt mollitia animi, id est
-        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-        cumque nihil impedit quo minus id quod maxime placeat facere possimus,
-        omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
-        quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
-        ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-        earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
-        voluptatibus maiores alias consequatur aut perferendis doloribus
-        asperiores repellat." 1914 translation by H. Rackham "On the other hand,
-        we denounce with righteous indignation and dislike men who are so
-        beguiled and demoralized by the charms of pleasure of the moment, so
-        blinded by desire, that they cannot foresee the pain and trouble that
-        are bound to ensue; and equal blame belongs to those who fail in their
-        duty through weakness of will, which is the same as saying through
-        shrinking from toil and pain. These cases are perfectly simple and easy
-        to distinguish. In a free hour, when our power of choice is untrammelled
-        and when nothing prevents our being able to do what we like best, every
-        pleasure is to be welcomed and every pain avoided. But in certain
-        circumstances and owing to the claims of duty or the obligations of
-        business it will frequently occur that pleasures have to be repudiated
-        and annoyances accepted. The wise man therefore always holds in these
-        matters to this principle of selection: he rejects pleasures to secure
-        other greater pleasures, or else he endures pains to avoid worse pains."
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+        arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras
+        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+        tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+        enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget
+        bibendum sodales, augue velit cursus nunc, Lorem ipsum dolor sit amet,
+        consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+        massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
+        eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede
+        justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu
+        pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+        semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+        porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante,
+        dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut
+        metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies
+        nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+        Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+        quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam
+        nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec
+        odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis
+        faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus
+        tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales
+        sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit
+        cursus nunc, Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+        penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+        quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+        consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+        vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
+        vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+        tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+        eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae,
+        eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat
+        a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque
+        rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur
+        ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas
+        tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+        amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus
+        pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
+        tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis
+        ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed
+        fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed
+        consequat, leo eget bibendum sodales, augue velit cursus nunc,
       </h1>
     </div>
   );

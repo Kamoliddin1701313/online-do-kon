@@ -57,6 +57,7 @@ if (typeof window !== "undefined") {
 
 const initialState = {
   isOpen: false,
+  isOpenBox: false,
   token: authData?.access || null, // 🟢 bu yerda access ishlatamiz
   user: authData?.user || null,
 };
@@ -87,8 +88,12 @@ const cartSlice = createSlice({
         localStorage.removeItem("auth");
       }
     },
+
+    toggleSidebar: (state, action) => {
+      state.isOpenBox = !state.isOpenBox;
+    },
   },
 });
 
-export const { setToken, clearToken } = cartSlice.actions;
+export const { setToken, clearToken, toggleSidebar } = cartSlice.actions;
 export default cartSlice.reducer;

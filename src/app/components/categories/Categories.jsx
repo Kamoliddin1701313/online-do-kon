@@ -6,7 +6,7 @@ import { FaRegUser } from "react-icons/fa";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
 import { useRef } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Categories() {
   let sliderRef = useRef(null);
@@ -19,6 +19,7 @@ function Categories() {
   };
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const categoriesDetail = (id) => {
     router.push(`/categories/${id}`);
@@ -61,7 +62,7 @@ function Categories() {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 10,
+    slidesToShow: 6,
     slidesToScroll: 1,
     initiaSlide: 0,
     arrows: false,
@@ -94,47 +95,56 @@ function Categories() {
   };
 
   return (
-    <div className="slider-container bg-primary h-[40px] relative">
+    <div className="slider-container bg-primary h-[50px] pb-[10px]">
       <div className="flex max-w-[1240px] mx-auto justify-between">
-        <div className="w-[90px] grid place-items-center">
+        {/* <div className="w-[90px] grid place-items-center">
           <button>
             <FaRegUser className="text-[20px] text-white cursor-pointer" />
           </button>
-        </div>
+        </div> */}
 
-        <div className="relative flex justify-between items-center">
-          {data?.length > 1 && (
-            <button onClick={previous}>
-              <GrFormPrevious className="text-[24px] text-white" />
-            </button>
-          )}
+        <div className="relative flex justify-between items-center w-full rounded-[30px] overflow-hidden">
+          <button
+            onClick={previous}
+            className="absolute z-10 cursor-pointer top-1/2 left-[6px] w-[20px] h-[20px] rounded-full bg-[#fbc902] -translate-y-1/2"
+          >
+            <GrFormPrevious className="text-[20px] text-white" />
+          </button>
 
           <Slider
             ref={(slider) => {
               sliderRef = slider;
             }}
             {...settings}
-            className="max-w-[1150px] m-auto h-full"
+            className="w-full m-auto h-full bg-white"
           >
             {data &&
-              data?.map((value, index) => (
-                <button
-                  onClick={() => categoriesDetail(value.id)}
-                  key={index}
-                  className="h-[40px] flex items-center"
-                >
-                  <span className="mx-auto h-[40px] cursor-pointer grid place-items-center w-[94%] bg-[#11ff00]">
-                    {value?.name}
-                  </span>
-                </button>
-              ))}
+              data?.map((value, index) => {
+                const isActive = pathname === `/categories/${value.id}`;
+                return (
+                  <button
+                    onClick={() => categoriesDetail(value.id)}
+                    key={index}
+                    className="h-[40px] flex items-center"
+                  >
+                    <span
+                      className={`mx-auto h-[40px] cursor-pointer grid place-items-center w-[94%]  ${
+                        isActive ? "bg-[#E3E3E3]" : "bg-white"
+                      }`}
+                    >
+                      {value?.name}
+                    </span>
+                  </button>
+                );
+              })}
           </Slider>
 
-          {data?.length > 1 && (
-            <button onClick={next}>
-              <MdOutlineNavigateNext className="text-[24px] text-white" />
-            </button>
-          )}
+          <button
+            onClick={next}
+            className="absolute z-10 cursor-pointer top-1/2 right-[6px] w-[20px] h-[20px] rounded-full bg-yellow-600 -translate-y-1/2"
+          >
+            <MdOutlineNavigateNext className="text-[20px] text-white" />
+          </button>
         </div>
       </div>
     </div>
