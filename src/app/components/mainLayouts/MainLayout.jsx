@@ -5,7 +5,6 @@ import Sidebar from "../sidebar/Sidebar";
 
 export default function MainLayout({ children }) {
   const isOpenBox = useSelector((state) => state.cart.isOpenBox);
-  console.log(isOpenBox);
 
   return (
     <div className="max-w-[1240px] mx-auto flex items-start justify-between">
@@ -18,7 +17,7 @@ export default function MainLayout({ children }) {
       </div>
 
       <div
-        className={`p-5 transition-all duration-400 bg-white ${
+        className={`p-5 transition-all duration-400 w-full bg-white ${
           isOpenBox ? "ml-[7%]" : "ml-[25%]"
         }`}
       >

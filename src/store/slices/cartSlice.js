@@ -46,19 +46,20 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
+// 🔐 LocalStorage'dan auth ma'lumotini olish
 let authData = null;
 if (typeof window !== "undefined") {
   try {
     authData = JSON.parse(localStorage.getItem("auth"));
-  } catch {
+  } catch (e) {
+    console.error("Auth parse error:", e);
     authData = null;
   }
 }
 
 const initialState = {
-  isOpen: false,
-  isOpenBox: false,
-  token: authData?.access || null, // 🟢 bu yerda access ishlatamiz
+  isOpenBox: false, // sidebar yopiq bo'lsin default
+  token: authData?.access || null,
   user: authData?.user || null,
 };
 
@@ -66,30 +67,29 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // ✅ Token saqlash
     setToken: (state, action) => {
-      const authData = {
-        access: action.payload.access,
-        refresh: action.payload.refresh,
-        user: action.payload.user,
-      };
+      const { access, refresh, user } = action.payload;
 
-      state.token = authData.access;
-      state.user = authData.user;
+      state.token = access;
+      state.user = user;
 
       if (typeof window !== "undefined") {
-        localStorage.setItem("auth", JSON.stringify(authData));
+        localStorage.setItem("auth", JSON.stringify({ access, refresh, user }));
       }
     },
 
+    // ✅ Token tozalash
     clearToken: (state) => {
       state.token = null;
-      state.user = null; // 🟢 user ham tozalansin
+      state.user = null;
       if (typeof window !== "undefined") {
         localStorage.removeItem("auth");
       }
     },
 
-    toggleSidebar: (state, action) => {
+    // ✅ Sidebar toggle
+    toggleSidebar: (state) => {
       state.isOpenBox = !state.isOpenBox;
     },
   },

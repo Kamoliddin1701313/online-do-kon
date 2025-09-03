@@ -115,6 +115,10 @@ function Sidebar() {
     },
   ];
 
+  const toggleSidebarFunction = () => {
+    dispatch(toggleSidebar());
+  };
+
   const categoriesDetail = (services) => {
     route.push(`/${services}`);
   };
@@ -122,31 +126,36 @@ function Sidebar() {
   return (
     <div className="relative">
       <div className="pt-5 pb-3">
-        <div className="px-3 py-5 min-h-[50vh] max-h-[67vh] overflow-y-auto custom-scroll bg-white flex flex-col gap-2.5">
+        <div
+          className={`py-5 min-h-[50vh] max-h-[67vh] overflow-y-auto custom-scroll bg-white flex flex-col gap-2.5 ${
+            isOpenBox ? "px-2" : "px-3 "
+          }`}
+        >
           {categoriyaData &&
             categoriyaData?.map((value, index) => (
               <button
                 onClick={() => categoriesDetail(value.link)}
                 key={index}
                 className={`flex items-center w-full p-2.5 gap-2.5 cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#E3E3E3] ${
-                  isOpenBox ? "bg-transparent rounded-[8px]" : "bg-[#E3E3E3]"
+                  isOpenBox
+                    ? "bg-transparent rounded-[8px] justify-center"
+                    : "bg-[#E3E3E3] justify-start"
                 }`}
               >
                 <span>{value?.icon}</span>
 
-                <span
-                  className={`text-[18px] transition-all duration-300 ease-in-out overflow-hidden
-    ${isOpenBox ? "opacity-0 max-w-0" : "opacity-100 max-w-full"}`}
-                >
-                  {value.name}
-                </span>
+                {!isOpenBox && (
+                  <span className="text-[18px] transition-all duration-300 ease-in-out">
+                    {value.name}
+                  </span>
+                )}
               </button>
             ))}
         </div>
       </div>
 
       <button
-        onClick={() => dispatch(toggleSidebar())}
+        onClick={toggleSidebarFunction}
         className="absolute -right-[38px] top-[20px] bg-[#E3E3E3] w-[32px] h-[36px] rounded-r-[10px] flex justify-center items-center cursor-pointer"
       >
         <IoSettingsOutline className="text-[20px]" />
