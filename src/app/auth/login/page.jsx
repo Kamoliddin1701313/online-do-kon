@@ -32,7 +32,7 @@ function Login() {
     setLoading((prev) => !prev);
 
     try {
-      const respons = await postData("users/login/", login);
+      const respons = await postData("login/", login);
       if (respons) {
         dispatch(setToken(respons));
         alert("Ro'yxatdan o'tildi Kamoliddin bratan");
@@ -56,7 +56,7 @@ function Login() {
   const pathname = usePathname(); // bu bizning saytimizdagi browzer url ni olib beradi next js da react router dom da useLocation qilib pathname qilib olinardi
 
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100vh] fixed top-0 left-0 z-50 bg-light">
       <div className="max-w-[1240px] m-auto flex h-full justify-center items-center">
         <div className="w-1/2 bg-[#b1b1b159] rounded-2xl p-7 flex flex-col gap-5">
           <button className="cursor-pointer flex items-center gap-2.5 mx-auto border-[2px] rounded-xl w-full justify-center p-3 border-[var(--black-gray)]">
@@ -138,7 +138,7 @@ function Login() {
               </div> */}
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-[var(--black-gray)]">
+                <label htmlFor="email" className="text-black">
                   Email
                 </label>
 
@@ -148,12 +148,12 @@ function Login() {
                   id="email"
                   type="email"
                   placeholder="Email"
-                  className="border-[2px] border-[var(--black-gray)] py-2.5 px-3.5 rounded-[8px] outline-none"
+                  className="border-[2px] border-black py-2.5 px-3.5 rounded-[8px] outline-none"
                 />
               </div>
 
               <div className="flex flex-col gap-2 relative">
-                <label htmlFor="parol" className="text-[var(--black-gray)]">
+                <label htmlFor="parol" className="text-black">
                   Parol
                 </label>
                 <input
@@ -162,7 +162,7 @@ function Login() {
                   id="parol"
                   type={`${parolInput ? "text" : "password"}`}
                   placeholder="Parol"
-                  className="border-[2px] border-[var(--black-gray)] py-2.5 px-3.5 rounded-[8px] outline-none"
+                  className="border-[2px] border-black py-2.5 px-3.5 rounded-[8px] outline-none"
                 />
 
                 <button
@@ -186,7 +186,7 @@ function Login() {
 
               <button
                 type="submit"
-                className="bg-[var(--black-gray)]  py-2.5 rounded-[8px] cursor-pointer text-white border-[2px] duration-300 ease-out border-[var(--black-gray)] hover:bg-[var(--light-gray)] hover:text-[var(--black-gray)]"
+                className="py-2.5 rounded-[8px] cursor-pointer border-[2px] duration-300 ease-out"
               >
                 {loading ? "Loading ..." : "Kirish"}
               </button>

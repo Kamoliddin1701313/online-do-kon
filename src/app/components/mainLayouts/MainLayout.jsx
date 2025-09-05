@@ -17,7 +17,7 @@ export default function MainLayout({ children }) {
       </div>
 
       <div
-        className={`p-5 transition-all duration-400 w-full bg-white ${
+        className={`p-5 transition-all duration-400 w-full ${
           isOpenBox ? "ml-[7%]" : "ml-[25%]"
         }`}
       >

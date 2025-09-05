@@ -35,12 +35,12 @@ function Register() {
     setLoading(true);
 
     if (!passwordSentModal) {
-      const respons = await postData("users/register/", user);
+      const respons = await postData("register/", user);
       alert("Emailingizga code yuborildi!");
       setPasswordSentModal(true);
       setLoading(false);
     } else {
-      const res = await postData("users/verify-email/", {
+      const res = await postData("verify-email/", {
         email: user.email,
         code: user.code,
       });
@@ -65,10 +65,10 @@ function Register() {
   };
 
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100vh] fixed top-0 left-0 z-50 bg-light">
       <div className="max-w-[1240px] m-auto flex h-full justify-center items-center relative">
         <div className="w-1/2 bg-[#b1b1b159] rounded-2xl p-7 flex flex-col gap-5">
-          <button className="cursor-pointer flex items-center gap-2.5 mx-auto border-[2px] rounded-xl w-full justify-center p-3 border-[var(--black-gray)]">
+          <button className="cursor-pointer flex items-center gap-2.5 mx-auto border-[2px] rounded-xl w-full justify-center p-3 border-black">
             <Image
               src={google_icon}
               alt="google_icon"
@@ -81,17 +81,15 @@ function Register() {
           </button>
 
           <div className="flex items-center gap-5">
-            <div className="w-full h-[1px] bg-[var(--black-gray)]"></div>
-            <p className="text-[var(--black-gray)] font-semibold uppercase">
-              Yoki
-            </p>
-            <div className="w-full h-[1px] bg-[var(--black-gray)]"></div>
+            <div className="w-full h-[1px] bg-black"></div>
+            <p className="text-black font-semibold uppercase">Yoki</p>
+            <div className="w-full h-[1px] bg-black"></div>
           </div>
 
-          <div className="flex items-center border-b-[1px] h-[50px] border-[var(--black-gray)] justify-between">
+          <div className="flex items-center border-b-[1px] h-[50px] border-black justify-between">
             <button
               onClick={LoginBtn}
-              className={`w-full grid place-items-center hover:border-b-[4px] duration-300 ease-out border-b-[4px] border-transparent hover:border-[var(--black-gray)] h-full cursor-pointer`}
+              className={`w-full grid place-items-center hover:border-b-[4px] duration-300 ease-out border-b-[4px] border-transparent hover:border-black h-full cursor-pointer`}
             >
               Kirish
             </button>
@@ -99,7 +97,7 @@ function Register() {
             <button
               className={`w-full grid place-items-center h-full cursor-pointer ${
                 pathname === "/auth/register"
-                  ? "border-b-[4px] border-[var(--black-gray)]"
+                  ? "border-b-[4px] border-black"
                   : ""
               }`}
             >
@@ -110,7 +108,7 @@ function Register() {
           <div className="flex flex-col gap-6">
             <form onSubmit={HandleChange} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-[var(--black-gray)]">
+                <label htmlFor="email" className="text-black">
                   Email:
                 </label>
 
@@ -120,12 +118,12 @@ function Register() {
                   type="email"
                   id="email"
                   placeholder="Email"
-                  className="border-[2px] border-[var(--black-gray)] py-2.5 px-3.5 rounded-[8px] outline-none"
+                  className="border-[2px] border-black py-2.5 px-3.5 rounded-[8px] outline-none"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="full_name" className="text-[var(--black-gray)]">
+                <label htmlFor="full_name" className="text-black">
                   Isim familiya:
                 </label>
 
@@ -135,7 +133,7 @@ function Register() {
                   type="text"
                   id="full_name"
                   placeholder="Isim familiya"
-                  className="border-[2px] border-[var(--black-gray)] py-2.5 px-3.5 rounded-[8px] outline-none"
+                  className="border-[2px] border-black py-2.5 px-3.5 rounded-[8px] outline-none"
                 />
               </div>
 
@@ -155,7 +153,7 @@ function Register() {
               </div> */}
 
               <div className="flex flex-col gap-2 relative">
-                <label htmlFor="parol" className="text-[var(--black-gray)]">
+                <label htmlFor="parol" className="text-black">
                   Parol
                 </label>
 
@@ -164,7 +162,7 @@ function Register() {
                   name="password"
                   type={`${parolInput ? "text" : "password"}`}
                   placeholder="Parol"
-                  className="border-[2px] border-[var(--black-gray)] py-2.5 px-3.5 rounded-[8px] outline-none"
+                  className="border-[2px] border-black py-2.5 px-3.5 rounded-[8px] outline-none"
                 />
 
                 <button
@@ -188,14 +186,14 @@ function Register() {
                     type="text"
                     id="full_name"
                     placeholder="Emailingizga kelgan kodni kiriting"
-                    className="border-[2px] border-[var(--black-gray)] py-2.5 px-3.5 rounded-[8px] outline-none"
+                    className="border-[2px] border-black py-2.5 px-3.5 rounded-[8px] outline-none"
                   />
                 </div>
               )}
 
               <button
                 type="submit"
-                className="bg-[var(--black-gray)]  py-2.5 rounded-[8px] cursor-pointer text-white border-[2px] duration-300 ease-out border-[var(--black-gray)] hover:bg-[var(--light-gray)] hover:text-[var(--black-gray)]"
+                className="py-2.5 rounded-[8px] cursor-pointer border-[2px] duration-300 ease-out border-black"
               >
                 {loading ? "Loading ..." : "Ro'yxatdan o'tish"}
               </button>

@@ -16,9 +16,11 @@ export default function RootLayout({ children }) {
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Header />
+
             <main className="flex-1 mt-[110px]">
               <MainLayout>{children}</MainLayout>
             </main>
+
             <Footer />
           </div>
         </Providers>

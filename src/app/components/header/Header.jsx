@@ -15,7 +15,7 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { clearToken } from "@/store/slices/cartSlice";
+import { logoutModal } from "@/store/slices/cartSlice";
 import Categories from "../categories/Categories";
 
 import dynamic from "next/dynamic";
@@ -27,6 +27,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
 import iphone from "../../../../public/images/iphone.webp";
+import Modal from "@/components/modal/Modal";
 
 function Header() {
   const router = useRouter();
@@ -34,6 +35,7 @@ function Header() {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.cart.token);
+  const logout = useSelector((state) => state.cart.logoutModal);
   const isAuth = Boolean(token); // ✅ token bor-yo‘qligini shu bilan bilamiz
 
   const { scrollYProgress } = useScroll();
@@ -91,9 +93,8 @@ function Header() {
     router.push("/auth/login");
   };
 
-  const logoutBtn = () => {
-    dispatch(clearToken());
-    router.push("/auth/register");
+  const logoutModalFunction = () => {
+    dispatch(logoutModal());
   };
 
   const categoriyData = [
@@ -315,16 +316,17 @@ function Header() {
   };
 
   return (
-    <div className="bg-primary h-[120px] fixed w-full z-50">
+    <div className="bg-light h-[120px] fixed w-full z-50">
+      {logout && <Modal />}
       <div className="max-w-[1240px] m-auto py-3.5 box-border h-[70px] flex gap-5 items-center justify-between relative">
         <Link
           href="/"
-          className="h-full rounded-[8px] bg-white px-3.5 w-1/8 text-primary text-center flex items-center"
+          className="h-full rounded-[8px] bg-transparent px-3.5 w-1/8 text-primary text-center flex items-center border-[2px] border-color"
         >
           <Image src={logo} alt="online_bozor_logo" className="w-[160px]" />
         </Link>
 
-        <div className="flex w-full gap-3 justify-end h-full items-center">
+        <div className="flex w-full items-stretch gap-3 justify-end h-full">
           <div>
             <Tooltip
               title={
@@ -335,7 +337,7 @@ function Header() {
               <TbAdjustmentsHorizontal
                 onClick={ToggleFunction}
                 type="button"
-                className="text-[34px] text-red-600 bg-white cursor-pointer rounded-[8px] p-[6px]"
+                className="text-[38px] h-full border-[2px] border-color cursor-pointer rounded-[8px] px-[6px]"
               />
             </Tooltip>
 
@@ -366,7 +368,7 @@ function Header() {
                             />
                             <div className="absolute top-2.5 right-2.5 flex items-center gap-2.5">
                               <button className="bg-white rounded-4xl p-2.5 grid place-items-center cursor-pointer">
-                                <FaRegHeart className="text-[18px] text-primary" />
+                                <FaRegHeart className="text-[18px]" />
                               </button>
 
                               <button className="bg-white rounded-[12px] p-[8px] cursor-pointer">
@@ -403,13 +405,13 @@ function Header() {
           <div className="relative w-full h-full">
             <form
               onSubmit={handleSearch}
-              className="flex items-center rounded-[25px] overflow-hidden border-[1px] h-full w-full border-white"
+              className="flex items-center rounded-[25px] overflow-hidden border-[2px] h-full w-full border-color"
             >
               <input
                 type="search"
                 autoComplete="off"
                 placeholder="Mahsulot qidirish..."
-                className="px-5 outline-none w-full h-full text-white"
+                className="px-5 outline-none w-full h-full text-black"
                 onChange={(e) => Search(e.target.value)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
@@ -422,12 +424,11 @@ function Header() {
               <button
                 type="button"
                 aria-label="Qidirish"
-                className="px-5 h-full text-black bg-white cursor-pointer border-white"
+                className="px-5 h-full bg-light cursor-pointer border-white hover:bg-white duration-300 ease-in"
               >
-                <MdYoutubeSearchedFor className="text-[22px] text-primary" />
+                <MdYoutubeSearchedFor className="text-[22px] text-primary text-[#000]" />
               </button>
-
-              {inFocus && globalSearch?.length > 0 && (
+              {inFocus && (
                 <div
                   className={`absolute top-[56px] left-0 w-full bg-light px-5 pb-5 rounded-b-[20px] shadow-xl/10 ${
                     inFocus ? "opacity-100 z-20" : "opacity-0 -z-20"
@@ -443,11 +444,11 @@ function Header() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                         >
-                          <h1>{item?.description}</h1>
+                          <h1 className="text-black">{item?.description}</h1>
                         </motion.div>
                       ))
                     ) : (
-                      <p className="text-gray-500">Hech narsa topilmadi</p>
+                      <p className="text-red-700">Hech narsa topilmadi 🥺</p>
                     )}
                   </div>
                 </div>
@@ -458,11 +459,11 @@ function Header() {
 
         <div className="flex items-center gap-5">
           {language ? (
-            <button className="text-white text-[18px] border-b-[2px] cursor-pointer">
+            <button className="text-[18px] border-b-[2px] cursor-pointer">
               uzb
             </button>
           ) : (
-            <button className="text-white text-[18px] border-b-[2px] cursor-pointer leading-5">
+            <button className="text-[18px] border-b-[2px] cursor-pointer leading-5">
               rus
             </button>
           )}
@@ -474,8 +475,8 @@ function Header() {
               title={<span className="text-white text-[16px]">Chiqish</span>}
               arrow
             >
-              <button onClick={logoutBtn}>
-                <HiOutlineLogout className="text-[24px] mt-[3px] text-white cursor-pointer" />
+              <button onClick={logoutModalFunction} className="cursor-pointer">
+                <HiOutlineLogout className="text-[24px] mt-[3px]" />
               </button>
             </Tooltip>
           ) : (
@@ -487,8 +488,8 @@ function Header() {
               }
               arrow
             >
-              <button onClick={loginBtn}>
-                <FaRegUser className="text-[18px] mt-[3px] text-white cursor-pointer" />
+              <button onClick={loginBtn} className="cursor-pointer">
+                <FaRegUser className="text-[18px] mt-[3px]" />
               </button>
             </Tooltip>
           )}
@@ -500,7 +501,7 @@ function Header() {
           aria-label="Sevimlilar"
           className="relative rounded cursor-pointer h-full"
         >
-          <TbShoppingBagHeart className="text-[22px] text-white" />
+          <TbShoppingBagHeart className="text-[22px]" />
           <span className="absolute -top-[10px] -right-[10px] bg-[#636A79] text-white rounded-full text-[14px] px-[6px] font-medium">
             0
           </span>
@@ -520,7 +521,7 @@ function Header() {
           height: "5px",
           originX: 0,
           overflow: "hidden",
-          backgroundColor: "#fbc902",
+          backgroundColor: "#789597ff",
         }}
       />
     </div>

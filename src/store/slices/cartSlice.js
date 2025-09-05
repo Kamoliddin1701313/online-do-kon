@@ -61,6 +61,7 @@ const initialState = {
   isOpenBox: false, // sidebar yopiq bo'lsin default
   token: authData?.access || null,
   user: authData?.user || null,
+  logoutModal: false,
 };
 
 const cartSlice = createSlice({
@@ -92,8 +93,14 @@ const cartSlice = createSlice({
     toggleSidebar: (state) => {
       state.isOpenBox = !state.isOpenBox;
     },
+
+    // Logout Modal chiqaruvchi funksiya
+    logoutModal: (state) => {
+      state.logoutModal = !state.logoutModal;
+    },
   },
 });
 
-export const { setToken, clearToken, toggleSidebar } = cartSlice.actions;
+export const { setToken, clearToken, toggleSidebar, logoutModal } =
+  cartSlice.actions;
 export default cartSlice.reducer;

@@ -95,7 +95,7 @@ function Categories() {
   };
 
   return (
-    <div className="slider-container bg-primary h-[50px] pb-[10px]">
+    <div className="slider-container bg-light h-[50px]">
       <div className="flex max-w-[1240px] mx-auto justify-between">
         {/* <div className="w-[90px] grid place-items-center">
           <button>
@@ -128,7 +128,7 @@ function Categories() {
                     className="h-[40px] flex items-center"
                   >
                     <span
-                      className={`mx-auto h-[40px] cursor-pointer grid place-items-center w-[94%]  ${
+                      className={`mx-auto h-[40px] cursor-pointer grid place-items-center ${
                         isActive ? "bg-[#E3E3E3]" : "bg-white"
                       }`}
                     >

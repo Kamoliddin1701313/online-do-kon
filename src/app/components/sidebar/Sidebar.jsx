@@ -8,7 +8,7 @@ import { TbAdjustmentsHorizontal } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { PiShoppingCartBold } from "react-icons/pi";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -123,6 +123,8 @@ function Sidebar() {
     route.push(`/${services}`);
   };
 
+  const pathname = usePathname();
+
   return (
     <div className="relative">
       <div className="pt-5 pb-3">
@@ -131,26 +133,34 @@ function Sidebar() {
             isOpenBox ? "px-2" : "px-3 "
           }`}
         >
+          {/*  */}
           {categoriyaData &&
-            categoriyaData?.map((value, index) => (
-              <button
-                onClick={() => categoriesDetail(value.link)}
-                key={index}
-                className={`flex items-center w-full p-2.5 gap-2.5 cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#E3E3E3] ${
-                  isOpenBox
-                    ? "bg-transparent rounded-[8px] justify-center"
-                    : "bg-[#E3E3E3] justify-start"
-                }`}
-              >
-                <span>{value?.icon}</span>
+            categoriyaData?.map((value, index) => {
+              const isActiveLink = pathname === `/${value?.link}`;
 
-                {!isOpenBox && (
-                  <span className="text-[18px] transition-all duration-300 ease-in-out">
-                    {value.name}
-                  </span>
-                )}
-              </button>
-            ))}
+              return (
+                <button
+                  onClick={() => categoriesDetail(value.link)}
+                  key={index}
+                  className={`flex items-center w-full p-2.5 gap-2.5 cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#789597ff] ${
+                    isOpenBox
+                      ? "bg-transparent rounded-[8px] justify-center"
+                      : "bg-light justify-start"
+                  }
+                  ${isActiveLink ? "bg-[#789597ff]" : ""}
+                  
+                  `}
+                >
+                  <span>{value?.icon}</span>
+
+                  {!isOpenBox && (
+                    <span className="text-[18px] transition-all duration-300 ease-in-out">
+                      {value.name}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
         </div>
       </div>
 

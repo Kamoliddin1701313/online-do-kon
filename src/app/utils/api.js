@@ -1,18 +1,19 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // GET request
-export async function getData(endpoint) {
+export async function getData(endpoint, token) {
   try {
     const res = await fetch(`${BASE_URL}/${endpoint}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      cache: "no-store", // Next.js server componentlarda keshni olib tashlash uchun
+      cache: "no-store",
     });
 
-    // if (!res.ok) throw new Error("GET xato bo‘ldi");
-    // return await res.json();
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error("GET xato:", error);
     throw error;
@@ -42,6 +43,6 @@ export async function postData(endpoint, data) {
     return responseData; // ✅ muvaffaqiyatli bo‘lsa shu qaytadi
   } catch (error) {
     console.error("POST xato:", error.message);
-    throw error; // ❗️ tashqarida ushlash uchun qaytadan tashlaymiz
+    throw error; // tashqarida ushlash uchun qaytadan tashlaymiz
   }
 }
